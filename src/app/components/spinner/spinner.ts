@@ -295,7 +295,13 @@ export class Spinner implements AfterViewInit,ControlValueAccessor {
                 if (this.decimalSeparator && this.thousandSeparator) {
                     value = value.split(this.localeDecimalSeparator);
     
-                    if (this.precision && value[1]) {
+                    if (this.precision) {
+                        if (!value[1]) {
+                            value[1] = '';
+                        }
+                        for (let i = value[1].length; i < this.precision; ++i) {
+                            value[1] += '0';
+                        }
                         value[1] = (this.decimalSeparator || this.localeDecimalSeparator) + value[1];
                     }
     
